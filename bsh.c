@@ -119,7 +119,9 @@ void execute_command_with_path(const char *cmd, char *args[]) {
 
 int main() {
 	char input[MAX_INPUT_SIZE];
+	char *args[MAX_ARG_SIZE];
 	char *token;
+	int i;
 
 	while (1) {
 		if (custom_fgets(input, MAX_INPUT_SIZE, STDIN_FILENO) == NULL) {
@@ -133,8 +135,9 @@ int main() {
 
 		token = strtok(input, " \t\n\r\f\v");
 		if (token != NULL) {
-			char *args[MAX_ARG_SIZE];
-			int i = 0;
+			if (strcmp(token, "exit") == 0) {
+				break;
+			}
 
 			args[i++] = token;
 
